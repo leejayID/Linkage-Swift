@@ -22,14 +22,18 @@ class CollectionViewController: UIViewController, UITableViewDelegate, UITableVi
         return tableView
     }()
     
-    fileprivate lazy var collectionView : UICollectionView = {
+    fileprivate lazy var flowlayout : LJCollectionViewFlowLayout = {
         let flowlayout = LJCollectionViewFlowLayout()
         flowlayout.scrollDirection = .vertical
         flowlayout.minimumLineSpacing = 2
         flowlayout.minimumInteritemSpacing = 2
         flowlayout.itemSize = CGSize(width: (ScreenWidth - 80 - 4 - 4) / 3, height: (ScreenWidth - 80 - 4 - 4) / 3 + 30)
         flowlayout.headerReferenceSize = CGSize(width: ScreenWidth, height: 30)
-        let collectionView = UICollectionView(frame: CGRect.init(x: 2 + 80, y: 2 + 64, width: ScreenWidth - 80 - 4, height: ScreenHeight - 64 - 4), collectionViewLayout: flowlayout)
+        return flowlayout
+    }()
+    
+    fileprivate lazy var collectionView : UICollectionView = {
+        let collectionView = UICollectionView(frame: CGRect.init(x: 2 + 80, y: 2 + 64, width: ScreenWidth - 80 - 4, height: ScreenHeight - 64 - 4), collectionViewLayout: self.flowlayout)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsVerticalScrollIndicator = false
