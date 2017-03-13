@@ -137,9 +137,9 @@ extension TableViewController {
         return headerView
     }
     
-    // TableView分区标题即将展示
+    // TableView 分区标题即将展示
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        // 当前的tableView是RightTableView，RightTableView滚动的方向向上，RightTableView是用户拖拽而产生滚动的（（主要判断RightTableView用户拖拽而滚动的，还是点击LeftTableView而滚动的）
+        // 当前的 tableView 是 RightTableView，RightTableView 滚动的方向向上，RightTableView 是用户拖拽而产生滚动的（（主要判断 RightTableView 用户拖拽而滚动的，还是点击 LeftTableView 而滚动的）
         if (rightTableView == tableView) && !isScrollDown && rightTableView.isDragging {
             selectRow(index: section)
         }
@@ -147,13 +147,13 @@ extension TableViewController {
     
     // TableView分区标题展示结束
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        // 当前的tableView是RightTableView，RightTableView滚动的方向向下，RightTableView是用户拖拽而产生滚动的（（主要判断RightTableView用户拖拽而滚动的，还是点击LeftTableView而滚动的）
+        // 当前的 tableView 是 RightTableView，RightTableView 滚动的方向向下，RightTableView 是用户拖拽而产生滚动的（（主要判断 RightTableView 用户拖拽而滚动的，还是点击 LeftTableView 而滚动的）
         if (rightTableView == tableView) && isScrollDown && rightTableView.isDragging {
             selectRow(index: section + 1)
         }
     }
     
-    // 当拖动右边TableView的时候，处理左边TableView
+    // 当拖动右边 TableView 的时候，处理左边 TableView
     private func selectRow(index : Int) {
         leftTableView.selectRow(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .top)
     }
