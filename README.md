@@ -1,4 +1,4 @@
-#【Swift 联动】：两个 TableView 之间的联动，TableView 与 CollectionView 之间的联动
+# 【Swift 联动】：两个 TableView 之间的联动，TableView 与 CollectionView 之间的联动
 
 ## 前言
 之前用 Objective-C 写了一篇联动的 demo 和文章，后来有小伙伴私信我有没有 Swfit 语言的，最近趁晚上和周末学习了一下 Swift 3.0 的语法，写了一个 Swift 的 demo。
