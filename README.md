@@ -1,4 +1,5 @@
 #【Swift 联动】：两个 TableView 之间的联动，TableView 与 CollectionView 之间的联动
+
 ## 前言
 之前用 Objective-C 写了一篇联动的 demo 和文章，后来有小伙伴私信我有没有 Swfit 语言的，最近趁晚上和周末学习了一下 Swift 3.0 的语法，写了一个 Swift 的 demo。
 思路和 [Objective-C 版本的联动文章](http://www.jianshu.com/p/7e534656988d)一样，实现的效果也是一样。先来看下效果图。
@@ -6,6 +7,7 @@
 ![联动.gif](http://upload-images.jianshu.io/upload_images/1321491-c779e8ced78e89c0.gif?imageMogr2/auto-orient/strip)
 
 ## 正文
+
 ### 一、TableView 与 TableView 之间的联动
 下面来说下实现两个 TableView 之间联动的主要思路：
 先解析数据装入模型。
@@ -131,6 +133,7 @@ private func selectRow(index : Int) {
 这样就实现了两个 TableView 之间的联动，是不是很简单。
 
 ### 二、TableView 与 CollectionView 之间的联动
+
 TableView 与 CollectionView 之间的联动与两个 TableView 之间的联动逻辑类似。
 下面说下实现 TableView 与 CollectionView 之间的联动的主要思路：
 还是一样，先解析数据装入模型。
@@ -264,6 +267,7 @@ TableView 与 CollectionView 之间的联动就这么实现了，是不是也很
 ![TableView 与 CollectionView 之间的联动](http://upload-images.jianshu.io/upload_images/1321491-3e4c91db3ab471cf.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## 最后
+
 由于笔者水平有限，文中如果有错误的地方，或者有更好的方法，还望大神指出。
 附上本文的所有 demo 下载链接，[【GitHub - Swift 版】](https://github.com/leejayID/Linkage-Swift)、[【GitHub - OC 版】](https://github.com/leejayID/Linkage)，配合 demo 一起看文章，效果会更佳。
 如果你看完后觉得对你有所帮助，还望在 GitHub 上点个 star。赠人玫瑰，手有余香。
