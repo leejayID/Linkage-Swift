@@ -28,7 +28,6 @@ class CollectionViewController: UIViewController, UITableViewDelegate, UITableVi
         flowlayout.minimumLineSpacing = 2
         flowlayout.minimumInteritemSpacing = 2
         flowlayout.itemSize = CGSize(width: (ScreenWidth - 80 - 4 - 4) / 3, height: (ScreenWidth - 80 - 4 - 4) / 3 + 30)
-        flowlayout.headerReferenceSize = CGSize(width: ScreenWidth, height: 30)
         return flowlayout
     }()
     
@@ -114,8 +113,30 @@ extension CollectionViewController {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectIndex = indexPath.row
-        collectionView.scrollToItem(at: IndexPath(row: 0, section: selectIndex), at: .top, animated: true)
+        
+        // 解决点击 TableView 后 CollectionView 的 Header 遮挡问题。
+        scrollToTop(section: selectIndex, animated: true)
+//        collectionView.scrollToItem(at: IndexPath(row: 0, section: selectIndex), at: .top, animated: true)
         tableView.scrollToRow(at: IndexPath(row: selectIndex, section: 0), at: .top, animated: true)
+    }
+    
+    //MARK: - 解决点击 TableView 后 CollectionView 的 Header 遮挡问题。
+    fileprivate func scrollToTop(section: Int, animated: Bool) {
+        let headerRect = frameForHeader(section: section)
+        let topOfHeader = CGPoint(x: 0, y: headerRect.origin.y - collectionView.contentInset.top)
+        collectionView.setContentOffset(topOfHeader, animated: animated)
+    }
+    
+    fileprivate func frameForHeader(section: Int) -> CGRect {
+        let indexPath = IndexPath(item: 0, section: section)
+        let attributes = collectionView.layoutAttributesForItem(at: indexPath)
+        
+        guard let frameForFirstCell = attributes?.frame else {
+            return .zero
+        }
+        
+        let headerHeight = collectionView(collectionView, layout: flowlayout, referenceSizeForHeaderInSection: section).height
+        return frameForFirstCell.offsetBy(dx: 0, dy: -headerHeight);
     }
 }
 
@@ -150,6 +171,10 @@ extension CollectionViewController {
             view.setDatas(model)
         }
         return view
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: ScreenWidth, height: 30)
     }
     
     // CollectionView 分区标题即将展示
