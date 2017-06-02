@@ -131,14 +131,11 @@ extension CollectionViewController {
     
     fileprivate func frameForHeader(section: Int) -> CGRect {
         let indexPath = IndexPath(item: 0, section: section)
-        let attributes = collectionView.layoutAttributesForSupplementaryElement(ofKind: UICollectionElementKindSectionHeader, at: indexPath)
-        
+        let attributes = collectionView.collectionViewLayout.layoutAttributesForSupplementaryView(ofKind: UICollectionElementKindSectionHeader, at: indexPath)
         guard let frameForFirstCell = attributes?.frame else {
             return .zero
         }
-        
-        let headerHeight = collectionView(collectionView, layout: flowlayout, referenceSizeForHeaderInSection: section).height
-        return frameForFirstCell.offsetBy(dx: 0, dy: -headerHeight);
+        return frameForFirstCell;
     }
 }
 
