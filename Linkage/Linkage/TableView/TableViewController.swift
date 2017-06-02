@@ -61,7 +61,7 @@ extension TableViewController {
         
         guard let path = Bundle.main.path(forResource: "meituan", ofType: "json") else { return }
         
-        guard let data = NSData(contentsOfFile: path) as? Data else { return }
+        guard let data = NSData(contentsOfFile: path) as Data? else { return }
         
         guard let anyObject = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) else { return }
         
