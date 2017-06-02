@@ -118,7 +118,7 @@ extension CollectionViewController {
         // 解决点击 TableView 后 CollectionView 的 Header 遮挡问题。
         scrollToTop(section: selectIndex, animated: true)
         
-//        collectionView.scrollToItem(at: IndexPath(row: 0, section: selectIndex), at: .top, animated: true)
+        // collectionView.scrollToItem(at: IndexPath(row: 0, section: selectIndex), at: .top, animated: true)
         tableView.scrollToRow(at: IndexPath(row: selectIndex, section: 0), at: .top, animated: true)
     }
     
