@@ -60,7 +60,7 @@ class CollectionViewController: UIViewController, UITableViewDelegate, UITableVi
         view.addSubview(tableView)
         view.addSubview(collectionView)
         
-        tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .top)
+        tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
     }
 }
 
@@ -179,7 +179,7 @@ extension CollectionViewController {
     // CollectionView 分区标题即将展示
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         // 当前 CollectionView 滚动的方向向上，CollectionView 是用户拖拽而产生滚动的（主要是判断 CollectionView 是用户拖拽而滚动的，还是点击 TableView 而滚动的）
-        if !isScrollDown && collectionView.isDragging {
+        if !isScrollDown && (collectionView.isDragging || collectionView.isDecelerating) {
             selectRow(index: indexPath.section)
         }
     }
@@ -187,7 +187,7 @@ extension CollectionViewController {
     // CollectionView 分区标题展示结束
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
         // 当前 CollectionView 滚动的方向向下，CollectionView 是用户拖拽而产生滚动的（主要是判断 CollectionView 是用户拖拽而滚动的，还是点击 TableView 而滚动的）
-        if isScrollDown && collectionView.isDragging {
+        if isScrollDown && (collectionView.isDragging || collectionView.isDecelerating) {
             selectRow(index: indexPath.section + 1)
         }
     }

@@ -50,7 +50,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         view.addSubview(leftTableView)
         view.addSubview(rightTableView)
         
-        leftTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .top)
+        leftTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
     }
 }
 
@@ -140,7 +140,9 @@ extension TableViewController {
     // TableView 分区标题即将展示
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         // 当前的 tableView 是 RightTableView，RightTableView 滚动的方向向上，RightTableView 是用户拖拽而产生滚动的（（主要判断 RightTableView 用户拖拽而滚动的，还是点击 LeftTableView 而滚动的）
-        if (rightTableView == tableView) && !isScrollDown && rightTableView.isDragging {
+        if (rightTableView == tableView)
+            && !isScrollDown
+            && (rightTableView.isDragging || rightTableView.isDecelerating) {
             selectRow(index: section)
         }
     }
@@ -148,7 +150,9 @@ extension TableViewController {
     // TableView分区标题展示结束
     func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         // 当前的 tableView 是 RightTableView，RightTableView 滚动的方向向下，RightTableView 是用户拖拽而产生滚动的（（主要判断 RightTableView 用户拖拽而滚动的，还是点击 LeftTableView 而滚动的）
-        if (rightTableView == tableView) && isScrollDown && rightTableView.isDragging {
+        if (rightTableView == tableView)
+            && isScrollDown
+            && (rightTableView.isDragging || rightTableView.isDecelerating) {
             selectRow(index: section + 1)
         }
     }
