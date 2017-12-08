@@ -165,15 +165,9 @@ extension TableViewController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if leftTableView == tableView {
             selectIndex = indexPath.row
-            self.scrollToTop(section: selectIndex, animated: true)
+            rightTableView.scrollToRow(at: IndexPath(row: 0, section: selectIndex), at: .top, animated: true)
             leftTableView.scrollToRow(at: IndexPath(row: selectIndex, section: 0), at: .top, animated: true)
         }
-    }
-    
-    fileprivate func scrollToTop(section: Int, animated: Bool) {
-        let headerRect = rightTableView.rect(forSection:section)
-        let topOfHeader = CGPoint(x: 0, y: headerRect.origin.y - rightTableView.contentInset.top)
-        rightTableView.setContentOffset(topOfHeader, animated: animated)
     }
     
     // 标记一下 RightTableView 的滚动方向，是向上还是向下
